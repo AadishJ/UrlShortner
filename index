@@ -1,0 +1,9 @@
+const express = require( "express" );
+const urlRouter = require( "./routes/urlRoutes" );
+const connectMongoDB = require( "./config/connection" );
+const PORT = 3000;
+const app = express();
+connectMongoDB( "mongodb://localhost:27017/urlShortner" ).then( () => console.log( "MongoDB started" ) );
+app.use( express.json() );
+app.use("/url", urlRouter)
+app.listen( PORT, () => console.log( `Server Started at port: ${ PORT }` ) );
